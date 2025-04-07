@@ -1,6 +1,6 @@
 
 import pygame
-from .constants import BLACK, ROWS, RED, SQUARE_SIZE, COLS, WHITE
+from .constants import BROWN, ROWS, CREAM, SQUARE_SIZE, COLS, WHITE, BLACK
 from .piece import Piece 
 class Board:
     def __init__(self):
@@ -10,10 +10,10 @@ class Board:
         self.create_board()
     
     def draw_squares(self, win):
-        win.fill(BLACK)
+        win.fill(BROWN)
         for row in range(ROWS):
             for col in range(row % 2, COLS, 2):
-                pygame.draw.rect(win, RED, (row*SQUARE_SIZE, col *SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+                pygame.draw.rect(win, CREAM, (row*SQUARE_SIZE, col *SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
 
     def move(self, piece, row, col):
         self.board[piece.row][piece.col], self.board[row][col] = self.board[row][col], self.board[piece.row][piece.col]
@@ -37,7 +37,7 @@ class Board:
                     if row < 3:
                         self.board[row].append(Piece(row, col, WHITE))
                     elif row > 4:
-                        self.board[row].append(Piece(row, col, RED))
+                        self.board[row].append(Piece(row, col, BLACK))
                     else:
                         self.board[row].append(0)
                 else:
@@ -55,7 +55,7 @@ class Board:
         for piece in pieces:
             self.board[piece.row][piece.col] = 0
             if piece != 0:
-                if piece.color == RED:
+                if piece.color == BLACK:
                     self.red_left -= 1
                 else:
                     self.white_left -= 1
@@ -64,7 +64,7 @@ class Board:
         if self.red_left <= 0:
             return WHITE
         elif self.white_left <= 0:
-            return RED
+            return BLACK
         
         return None 
     
@@ -74,7 +74,7 @@ class Board:
         right = piece.col + 1
         row = piece.row
 
-        if piece.color == RED or piece.king:
+        if piece.color == BLACK or piece.king:
             moves.update(self._traverse_left(row -1, max(row-3, -1), -1, piece.color, left))
             moves.update(self._traverse_right(row -1, max(row-3, -1), -1, piece.color, right))
         if piece.color == WHITE or piece.king:
@@ -149,7 +149,7 @@ class Board:
         
         return moves
 import pygame
-from .constants import BLACK, ROWS, RED, SQUARE_SIZE, COLS, WHITE
+from .constants import BROWN, ROWS, CREAM, SQUARE_SIZE, COLS, WHITE
 from .piece import Piece
 
 class Board:
@@ -160,10 +160,10 @@ class Board:
         self.create_board()
     
     def draw_squares(self, win):
-        win.fill(BLACK)
+        win.fill(BROWN)
         for row in range(ROWS):
             for col in range(row % 2, COLS, 2):
-                pygame.draw.rect(win, RED, (row*SQUARE_SIZE, col *SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+                pygame.draw.rect(win, CREAM, (row*SQUARE_SIZE, col *SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
 
     def evaluate(self):
         return self.white_left - self.red_left + (self.white_kings * 0.5 - self.red_kings * 0.5)
@@ -198,7 +198,7 @@ class Board:
                     if row < 3:
                         self.board[row].append(Piece(row, col, WHITE))
                     elif row > 4:
-                        self.board[row].append(Piece(row, col, RED))
+                        self.board[row].append(Piece(row, col, BLACK))
                     else:
                         self.board[row].append(0)
                 else:
@@ -216,7 +216,7 @@ class Board:
         for piece in pieces:
             self.board[piece.row][piece.col] = 0
             if piece != 0:
-                if piece.color == RED:
+                if piece.color == BLACK:
                     self.red_left -= 1
                 else:
                     self.white_left -= 1
@@ -225,7 +225,7 @@ class Board:
         if self.red_left <= 0:
             return WHITE
         elif self.white_left <= 0:
-            return RED
+            return BLACK
         
         return None 
     
@@ -235,7 +235,7 @@ class Board:
         right = piece.col + 1
         row = piece.row
 
-        if piece.color == RED or piece.king:
+        if piece.color == BLACK or piece.king:
             moves.update(self._traverse_left(row -1, max(row-3, -1), -1, piece.color, left))
             moves.update(self._traverse_right(row -1, max(row-3, -1), -1, piece.color, right))
         if piece.color == WHITE or piece.king:

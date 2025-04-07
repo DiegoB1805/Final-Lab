@@ -1,6 +1,6 @@
 
 import pygame
-from checkers.constants import WIDTH, HEIGHT, SQUARE_SIZE, RED
+from checkers.constants import WIDTH, HEIGHT, SQUARE_SIZE, CREAM
 from checkers.game import Game
 
 
