@@ -5,8 +5,8 @@ from .piece import Piece
 class Board:
     def __init__(self):
         self.board = []
-        self.red_left = self.white_left = 12
-        self.red_kings = self.white_kings = 0
+        self.black_left = self.white_left = 12
+        self.black_kings = self.white_kings = 0
         self.create_board()
     
     def draw_squares(self, win):
@@ -14,7 +14,7 @@ class Board:
         for row in range(ROWS):
             for col in range(row % 2, COLS, 2):
                 pygame.draw.rect(win, CREAM, (row*SQUARE_SIZE, col *SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
-
+  
     def move(self, piece, row, col):
         self.board[piece.row][piece.col], self.board[row][col] = self.board[row][col], self.board[piece.row][piece.col]
         piece.move(row, col)
@@ -24,7 +24,7 @@ class Board:
             if piece.color == WHITE:
                 self.white_kings += 1
             else:
-                self.red_kings += 1 
+                self.black_kings += 1 
 
     def get_piece(self, row, col):
         return self.board[row][col]
@@ -56,12 +56,12 @@ class Board:
             self.board[piece.row][piece.col] = 0
             if piece != 0:
                 if piece.color == BLACK:
-                    self.red_left -= 1
+                    self.black_left -= 1
                 else:
                     self.white_left -= 1
     
     def winner(self):
-        if self.red_left <= 0:
+        if self.black_left <= 0:
             return WHITE
         elif self.white_left <= 0:
             return BLACK
