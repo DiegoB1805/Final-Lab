@@ -111,12 +111,13 @@ class Board:
                     moves[(r, left)] = last
                 
                 if last:
+                    new_skipped = skipped + last if skipped else last
                     if step == -1:
                         row = max(r-3, -1)
                     else:
                         row = min(r+3, ROWS)
-                    moves.update(self._search_left_diagonal(r+step, row, step, color, left-1,skipped=last))
-                    moves.update(self._search_right_diagonal(r+step, row, step, color, left+1,skipped=last))
+                    moves.update(self._search_left_diagonal(r+step, row, step, color, left-1,skipped=new_skipped))
+                    moves.update(self._search_right_diagonal(r+step, row, step, color, left+1,skipped=new_skipped))
                 break
             elif current.color == color:
                 break
@@ -144,12 +145,13 @@ class Board:
                     moves[(r, right)] = last
                 
                 if last:
+                    new_skipped = skipped + last if skipped else last
                     if step == -1:
                         row = max(r-3, -1)
                     else:
                         row = min(r+3, ROWS)
-                    moves.update(self._search_left_diagonal(r+step, row, step, color, right-1,skipped=last))
-                    moves.update(self._search_right_diagonal(r+step, row, step, color, right+1,skipped=last))
+                    moves.update(self._search_left_diagonal(r+step, row, step, color, right-1,skipped=new_skipped))
+                    moves.update(self._search_right_diagonal(r+step, row, step, color, right+1,skipped=new_skipped))
                 break
             elif current.color == color:
                 break
