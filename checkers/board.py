@@ -112,7 +112,7 @@ class Board:
                 
                 if last:
                     if step == -1:
-                        row = max(r-3, 0)
+                        row = max(r-3, -1)
                     else:
                         row = min(r+3, ROWS)
                     moves.update(self._search_left_diagonal(r+step, row, step, color, left-1,skipped=last))
@@ -145,7 +145,7 @@ class Board:
                 
                 if last:
                     if step == -1:
-                        row = max(r-3, 0)
+                        row = max(r-3, -1)
                     else:
                         row = min(r+3, ROWS)
                     moves.update(self._search_left_diagonal(r+step, row, step, color, right-1,skipped=last))
