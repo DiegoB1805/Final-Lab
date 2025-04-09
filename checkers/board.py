@@ -8,8 +8,8 @@ class Board:
     #En este metodo inicializamos la lista board, creamos el tablero y definimos la cantidad de piezas
     def __init__(self):
         self.board = []
-        self.red_left = self.white_left = 12
-        self.red_kings = self.white_kings = 0
+        self.black_left = self.white_left = 12
+        self.black_kings = self.white_kings = 0
         self.create_board()
     
     #En este metodo dibujamos las casillas del tablero                
@@ -54,7 +54,7 @@ class Board:
             if piece.color == WHITE:
                 self.white_kings += 1
             else:
-                self.red_kings += 1 
+                self.black_kings += 1 
 
     #Aqui obtenemos la pieza en la posicion seleccionada
     def get_piece(self, row, col):
@@ -66,13 +66,13 @@ class Board:
             self.board[piece.row][piece.col] = 0
             if piece != 0:
                 if piece.color == BLACK:
-                    self.red_left -= 1
+                    self.black_left -= 1
                 else:
                     self.white_left -= 1
 
     #Aqui verificamos si hay un ganador, si no hay piezas del color rojo o blanco
     def winner(self):
-        if self.red_left <= 0:
+        if self.black_left <= 0:
             return WHITE
         elif self.white_left <= 0:
             return BLACK
@@ -162,7 +162,7 @@ class Board:
     
     #Aqui verificamos el valor del movimiento
     def evaluate(self):
-        return self.white_left - self.red_left + ((self.white_kings - self.red_kings ) * 0.5) #Tomando en cuenta el valor de los reyes
+        return self.white_left - self.black_left + ((self.white_kings - self.black_kings ) * 0.5) #Tomando en cuenta el valor de los reyes
     
     #Conseguimos todas las piezas de un mismo color
     def get_all_pieces(self, color):
