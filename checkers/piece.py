@@ -1,10 +1,10 @@
-from .constants import BLACK, WHITE, SQUARE_SIZE, GREY, CROWN
+from checkers.constants import BLACK, SQUARE_SIZE, CROWN
 import pygame
 
 class Piece:
     #Aqui tenemos las constantes para el tamaño de la pieza y el contorno
     PADDING = 15
-    OUTLINE = 4
+    OUTLINE = 3
 
     #Aqui inicializamos la pieza con su color, posicion y si es rey o no
     def __init__(self, row, col, color):
@@ -28,7 +28,7 @@ class Piece:
     #Aqui dibujamos la pieza en el tablero
     def draw(self, window):
         radius = SQUARE_SIZE//2 - self.PADDING  #Calculamos el radio de la pieza
-        pygame.draw.circle(window, GREY, (self.x, self.y), radius + self.OUTLINE) #Dibujamos el contorno
+        pygame.draw.circle(window, BLACK, (self.x, self.y), radius + self.OUTLINE) #Dibujamos el contorno
         pygame.draw.circle(window, self.color, (self.x, self.y), radius) #Dibujamos la pieza
         if self.king:
             window.blit(CROWN, (self.x - CROWN.get_width()//2, self.y - CROWN.get_height()//2)) #Dibujamos la corona en la pieza si es rey

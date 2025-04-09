@@ -1,6 +1,6 @@
 import pygame
-from .constants import BLACK, ROWS, BLACK, SQUARE_SIZE, COLS, WHITE, BROWN, GREY
-from .piece import Piece 
+from checkers.constants import BLACK, ROWS, BLACK, SQUARE_SIZE, COLS, WHITE, BROWN, GREY
+from checkers.piece import Piece 
 
 #En esta clase se define el tablero y las piezas, como se dibujan y como se mueven.
 

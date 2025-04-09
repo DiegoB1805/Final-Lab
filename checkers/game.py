@@ -1,5 +1,5 @@
 import pygame
-from .constants import BLACK, WHITE, BLUE, SQUARE_SIZE
+from checkers.constants import BLACK, WHITE, BLUE, SQUARE_SIZE
 from checkers.board import Board
 
 #En este archivo se encuentra la clase Game, que es la encargada de manejar los turnos y la logica de los movimientos.
