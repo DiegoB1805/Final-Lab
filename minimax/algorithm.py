@@ -17,7 +17,7 @@ def minimax(position, depth, max_player, game, alpha, beta):
                 best_move = move
             alpha = max(alpha, evaluation)
             if beta <= alpha:
-                break  
+                break  #poda 
         return maxEval, best_move
     
     else:  # Jugador humano
@@ -30,7 +30,7 @@ def minimax(position, depth, max_player, game, alpha, beta):
                 best_move = move
             beta = min(beta, evaluation)
             if beta <= alpha:
-                break  # Poda alpha
+                break  # poda
         return minEval, best_move
 
 
