@@ -94,39 +94,55 @@ class Board:
     
         return moves #Devolvemos los movimientos validos
 
+    # Método para buscar movimientos válidos en la diagonal izquierda (izquierda-arriba o izquierda-abajo)
     def _search_left_diagonal(self, start, stop, step, color, left, skipped=[]):
-        moves = {}
-        last = []
+        moves = {}      # Diccionario para almacenar los movimientos válidos y las piezas saltadas
+        last = []       # Lista para almacenar una posible pieza que se podría saltar
+
+        # Recorremos las filas en el rango especificado
         for r in range(start, stop, step):
-            if left < 0:
+            if left < 0:  # Si se sale del tablero por la izquierda, se detiene
                 break
             
-            current = self.board[r][left]
-            if current == 0:
+            current = self.board[r][left]  # Obtenemos la casilla actual en la diagonal
+
+            if current == 0:  # Si la casilla está vacía
                 if skipped and not last:
-                    break
+                    break  # No se puede saltar una pieza si no había una justo antes
                 elif skipped:
+                    # Si ya había piezas saltadas previamente, las agregamos al nuevo movimiento
                     moves[(r, left)] = last + skipped
                 else:
+                    # Si no se han saltado piezas aún, simplemente se añade el movimiento
                     moves[(r, left)] = last
                 
                 if last:
+                    # Si se saltó una pieza en este paso, se busca recursivamente más movimientos encadenados
                     new_skipped = skipped + last if skipped else last
+
+                    # Determinamos el nuevo límite para la búsqueda recursiva según la dirección del paso
                     if step == -1:
-                        row = max(r-3, -1)
+                        row = max(r-3, -1)  # Asegura que no se salga del tablero por arriba
                     else:
-                        row = min(r+3, ROWS)
-                    moves.update(self._search_left_diagonal(r+step, row, step, color, left-1,skipped=new_skipped))
-                    moves.update(self._search_right_diagonal(r+step, row, step, color, left+1,skipped=new_skipped))
-                break
+                        row = min(r+3, ROWS)  # Asegura que no se salga del tablero por abajo
+
+                    # Búsqueda recursiva en ambas diagonales para explorar múltiples capturas
+                    moves.update(self._search_left_diagonal(r+step, row, step, color, left-1, skipped=new_skipped))
+                    moves.update(self._search_right_diagonal(r+step, row, step, color, left+1, skipped=new_skipped))
+                
+                break  # Después de encontrar un movimiento válido, no seguimos en esta dirección
+
             elif current.color == color:
-                break
+                break  # Si encuentra una pieza del mismo color, no puede seguir en esa dirección
+
             else:
+                # Se encontró una pieza del color opuesto, posible objetivo para saltar
                 last = [current]
 
+            # Avanzamos a la siguiente columna a la izquierda
             left -= 1
         
-        return moves
+        return moves  # Retornamos el diccionario con los movimientos válidos encontrados
 
     def _search_right_diagonal(self, start, stop, step, color, right, skipped=[]):
         moves = {}

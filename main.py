@@ -3,7 +3,7 @@ from checkers.constants import WIDTH, HEIGHT, SQUARE_SIZE, WHITE
 from checkers.game import Game
 from minimax.algorithm import minimax
 
-FPS = 60
+FPS = 75
 
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Checkers')
