@@ -3,29 +3,34 @@ from checkers.constants import BLACK, WHITE
 import pygame
 
 
-def minimax(position, depth, max_player, game):
-    if depth == 0 or position.winner() != None: #Revisamos si el depth es 0 o si hay un ganador
-        return position.evaluate(), position #Y devolvemos la evaluacion de la posicion y la posicion actual
+def minimax(position, depth, max_player, game, alpha, beta):
+    if depth == 0 or position.winner() != None:
+        return position.evaluate(), position
     
-    if max_player:  #Si el jugador es el AI
+    if max_player:  # AI
         maxEval = float('-inf')
         best_move = None
-        for move in get_all_moves_in_board(position, WHITE, game): #obtenemos todos los movimientos validos y lo evualuamos
-            evaluation = minimax(move, depth-1, False, game)[0]
-            maxEval = max(maxEval, evaluation)
-            if maxEval == evaluation:
+        for move in get_all_moves_in_board(position, WHITE, game):
+            evaluation = minimax(move, depth - 1, False, game, alpha, beta)[0]
+            if evaluation > maxEval:
+                maxEval = evaluation
                 best_move = move
-        
+            alpha = max(alpha, evaluation)
+            if beta <= alpha:
+                break  
         return maxEval, best_move
-    else:
+    
+    else:  # Jugador humano
         minEval = float('inf')
         best_move = None
         for move in get_all_moves_in_board(position, BLACK, game):
-            evaluation = minimax(move, depth-1, True, game)[0]
-            minEval = min(minEval, evaluation)
-            if minEval == evaluation:
+            evaluation = minimax(move, depth - 1, True, game, alpha, beta)[0]
+            if evaluation < minEval:
+                minEval = evaluation
                 best_move = move
-        
+            beta = min(beta, evaluation)
+            if beta <= alpha:
+                break  # Poda alpha
         return minEval, best_move
 
 
