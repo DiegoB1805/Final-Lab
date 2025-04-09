@@ -8,20 +8,20 @@ def minimax(position, depth, max_player, game, alpha, beta):
         return position.evaluate(), position
     
     if max_player:  # AI
-        maxEval = float('-inf')
-        best_move = None
-        for move in get_all_moves_in_board(position, WHITE, game):
-            evaluation = minimax(move, depth - 1, False, game, alpha, beta)[0]
-            if evaluation > maxEval:
+        maxEval = float('-inf') #Inicializamos el maxEval en -infinito
+        best_move = None 
+        for move in get_all_moves_in_board(position, WHITE, game): #Para cada movimiento en el tablero, de un color
+            evaluation = minimax(move, depth - 1, False, game, alpha, beta)[0]  #evaluamos el movimiento y obtenemos su valor
+            if evaluation > maxEval: #Si la evaluacion es mayor que el maxEval, lo actualizamos
                 maxEval = evaluation
                 best_move = move
-            alpha = max(alpha, evaluation)
-            if beta <= alpha:
+            alpha = max(alpha, evaluation)  #actualizamos el alpha
+            if beta <= alpha:   #Comparamos para hacer la poda
                 break  #poda 
-        return maxEval, best_move
+        return maxEval, best_move   #Si no se hace la poda, devolvemos el maxEval y el mejor movimiento
     
     else:  # Jugador humano
-        minEval = float('inf')
+        minEval = float('inf') #inicializamos el minEval en infinito
         best_move = None
         for move in get_all_moves_in_board(position, BLACK, game):
             evaluation = minimax(move, depth - 1, True, game, alpha, beta)[0]
