@@ -1,5 +1,5 @@
 import pygame
-from checkers.constants import BLACK, ROWS, BLACK, SQUARE_SIZE, COLS, WHITE, BROWN, GREY
+from checkers.constants import BLACK, ROWS, BLACK, SQUARE_SIZE, COLS, WHITE, BROWN, CREAM
 from checkers.piece import Piece 
 
 #En esta clase se define el tablero y las piezas, como se dibujan y como se mueven.
@@ -18,7 +18,7 @@ class Board:
         for row in range(ROWS):
             for col in range(row % 2, COLS, 2):
                 #Dibujamos el cuadrado rojo
-                pygame.draw.rect(window, WHITE, (row*SQUARE_SIZE, col *SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+                pygame.draw.rect(window, CREAM, (row*SQUARE_SIZE, col *SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
 
     #Adjuntamos el tablero a la lista board y ponemos las piezas en su lugar
     def create_board(self):

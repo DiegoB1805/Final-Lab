@@ -7,6 +7,7 @@ ROWS, COLS = 8, 8
 SQUARE_SIZE = WIDTH//COLS
 
 # rgb
+CREAM = (255, 253, 208)
 BLACK = (255, 0, 0)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
